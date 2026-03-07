@@ -1,9 +1,16 @@
 package com.meuprojeto.course.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Users implements Serializable {
+@Entity
+@Table(name = "tb_user")
+public class User implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long Id;
     private String Name;
@@ -11,17 +18,19 @@ public class Users implements Serializable {
     private String phone;
     private String password;
 
-    public Users (){
+    public User(){
 
     }
 
-    public Users(Long Id, String Name, String Email, String phone, String password) {
+    public User(Long Id, String Name, String Email, String phone, String password) {
         this.Id = Id;
         this.Name = Name;
         this.Email = Email;
         this.phone = phone;
         this.password = password;
     }
+
+
 
     public Long getId() {
         return Id;
@@ -66,8 +75,8 @@ public class Users implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Users users = (Users) o;
-        return Objects.equals(Id, users.Id);
+        User user = (User) o;
+        return Objects.equals(Id, user.Id);
     }
 
     @Override
