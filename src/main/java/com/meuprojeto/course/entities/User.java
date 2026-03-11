@@ -1,5 +1,6 @@
 package com.meuprojeto.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -13,12 +14,13 @@ public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String Name;
     private String Email;
     private String phone;
     private String password;
 
+    @JsonIgnore
     @OneToMany (mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
@@ -28,8 +30,8 @@ public class User{
 
     }
 
-    public User(Long Id, String Name, String Email, String phone, String password) {
-        this.Id = Id;
+    public User(Long id, String Name, String Email, String phone, String password) {
+        this.id = id;
         this.Name = Name;
         this.Email = Email;
         this.phone = phone;
@@ -39,11 +41,11 @@ public class User{
 
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        id = id;
     }
 
     public String getName() {
@@ -85,11 +87,11 @@ public class User{
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(Id, user.Id);
+        return Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(Id);
+        return Objects.hashCode(id);
     }
 }
