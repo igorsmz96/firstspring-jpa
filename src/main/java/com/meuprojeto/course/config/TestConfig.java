@@ -2,6 +2,7 @@ package com.meuprojeto.course.config;
 
 import com.meuprojeto.course.entities.Order;
 import com.meuprojeto.course.entities.User;
+import com.meuprojeto.course.entities.enums.OrderStatus;
 import com.meuprojeto.course.repositories.OrderRepository;
 import com.meuprojeto.course.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,9 @@ public class TestConfig implements CommandLineRunner {
 
 
         List<Order> orders = List.of(
-                new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1),
-                new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u2),
-                new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1)
+                new Order(null, Instant.parse("2019-06-20T19:53:07Z"), OrderStatus.CANCELLED ,u1),
+                new Order(null, Instant.parse("2019-06-20T19:53:07Z"),OrderStatus.DELIVERED, u2),
+                new Order(null, Instant.parse("2019-07-22T15:21:22Z"),OrderStatus.PAID, u1)
 
         );
 
@@ -35,14 +36,17 @@ public class TestConfig implements CommandLineRunner {
         orderRepository.saveAll(orders);
     }
 
-    @Autowired
-    private UserRepository userRepository;
 
+    private final UserRepository userRepository;
     private final OrderRepository orderRepository;
 
-    public TestConfig(OrderRepository orderRepository) {
+    public TestConfig(UserRepository userRepository, OrderRepository orderRepository){
+        this.userRepository = userRepository;
         this.orderRepository = orderRepository;
     }
 
 
-}
+    }
+
+
+
