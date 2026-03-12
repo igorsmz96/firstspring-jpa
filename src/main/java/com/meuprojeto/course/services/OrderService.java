@@ -1,9 +1,11 @@
 package com.meuprojeto.course.services;
 
 import com.meuprojeto.course.entities.Order;
+import com.meuprojeto.course.entities.enums.OrderStatus;
 import com.meuprojeto.course.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,7 @@ public class OrderService {
     }
 
     public List<Order> findAll(){
+
         return repository.findAll();
     }
 
@@ -25,4 +28,7 @@ public class OrderService {
         return order.get();
 
     }
+
+
+
 }
